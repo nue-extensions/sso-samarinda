@@ -1,0 +1,34 @@
+{
+    "name": "nue-extensions/sso-samarinda",
+    "description": "SSO integration for Nue Extensions.",
+    "type": "library",
+    "keywords": ["nue", "extension"],
+    "homepage": "https://github.com/nue-extensions/sso-samarinda",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Noviyanto Rahmadi",
+            "email": "novay@btekno.id"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "novay/nue": "^3.0", 
+        "zefy/php-simple-sso": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nue\\SSOSamarinda\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nue\\SSOSamarinda\\Providers\\SSOSamarindaServiceProvider"
+            ]
+        }
+    }
+}
