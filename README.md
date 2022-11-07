@@ -1,4 +1,4 @@
-SSO=Samarinda untuk Nue
+SSO-Samarinda untuk Nue
 ======
 
 Integrasi SSO-Samarinda ke aplikasi kamu.
