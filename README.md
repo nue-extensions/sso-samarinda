@@ -162,4 +162,4 @@ public function logout(Request $request)
 
 ## Lisensi
 
-**SSO=Samarinda** ini dikembangin dengan [Lisensi MIT](LICENSE.md). Artinya kamu bebas menggunakannya baik untuk kepentingan pribadi maupun komersil. Enjoy!
+**SSO-Samarinda** ini dikembangin dengan [Lisensi MIT](LICENSE.md). Artinya kamu bebas menggunakannya baik untuk kepentingan pribadi maupun komersil. Enjoy!
