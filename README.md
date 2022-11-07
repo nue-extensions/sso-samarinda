@@ -63,19 +63,6 @@ SSO_BROKER_SECRET=
 `SSO_SERVER_URL` berisi URI dari SSO Samarinda. `SSO_BROKER_NAME` dan `SSO_BROKER_SECRET` harus diisi sesuai dengan data aplikasi yang didaftarkan di https://sso.samarindakota.go.id.
 
 2. Kustom Middleware bawaan SSO-Samarinda :
-Edit file `app/Http/Kernel.php` dan tambahkan `\Nue\SSOSamarinda\Http\Middleware\SSOAutoLogin::class` ke grup `web` middleware. Contohnya seperti ini:
-```php
-protected $middlewareGroups = [
-	'web' => [
-		...
-	    \Nue\SSOSamarinda\Http\Middleware\SSOAutoLogin::class,
-	],
-
-	'api' => [
-		...
-	],
-];
-```
 
 Apabila dalam implementasinya Anda ingin melakukan penyimpanan sesi atau melakukan manipulasi pada models **User**, Anda juga bisa melakukan custom pada middleware yang telah disediakan. Contohnya:
 
