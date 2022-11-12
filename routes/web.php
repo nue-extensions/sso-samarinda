@@ -1,6 +1,7 @@
 <?php
 
-Route::namespace('Nue\SSOSamarinda\Http\Controllers')->middleware('web')->group(function() {
+Route::namespace('Nue\SSOSamarinda\Http\Controllers')->middleware(['web', 'nue'])
+	->group(function() {
 
 	Route::prefix('oauth/sso')->group(function() {
 		Route::get('authorize', 'OAuthController@login')->name('sso.authorize');
