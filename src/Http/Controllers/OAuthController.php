@@ -25,7 +25,7 @@ class OAuthController extends Controller
     {
         $this->middleware('guest')->except('logout');
 
-        $this->redirectTo = config('sso.redirect_to');
+        $this->redirectTo = SSOSamarinda::config('redirect_to');
     }
 
     /**
