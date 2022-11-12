@@ -21,7 +21,7 @@ php artisan nue:import sso-samarinda
 3. Update `table users`
 
 ```bash
-php artisan migrate --path=app/Nue/Extensions/nue-extensions/sso-samarinda/database/migrations/2014_10_12_000000_alter_users_table.php
+php artisan migrate --path=vendor/nue-extensions/sso-samarinda/database/migrations/2014_10_12_000000_alter_users_table.php
 ```
 Perintah ini akan menyisipkan field baru dengan nama `uid` dalam tabel `users` kamu. Kamu bisa menambahkan field `uid` secara manual tanpa harus menggunakan perintah ini.
 
