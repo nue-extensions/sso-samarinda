@@ -54,7 +54,10 @@ class UserController extends Controller
             return $this->datatable($data);
         endif;
 
-        return view("{$this->view}.index", compact('data'));
+        return nue_view("{$this->view}.index", [
+            'title' => $this->title, 
+            'data' => $data
+        ]);
     }
 
     /**
@@ -68,7 +71,10 @@ class UserController extends Controller
     {
         $permissions = config('nue.database.permissions_model')::pluck('name', 'id');
 
-        return view("$this->view.create", compact('permissions'));
+        return nue_view("$this->view.create", [
+            'title' => $this->title, 
+            'permissions' => $permissions
+        ]);
     }
 
     /**
@@ -92,7 +98,7 @@ class UserController extends Controller
         $user->roles()->sync($request->roles);
         $user->permissions()->sync($request->permissions);
 
-        notify()->flash($this->tCreate, 'success');
+        nue_notify($this->tCreate, 'success');
         return redirect(route("$this->prefix.index"));
     }
 
@@ -123,7 +129,11 @@ class UserController extends Controller
      
         $permissions = config('nue.database.permissions_model')::pluck('name', 'id');
 
-        return view("{$this->view}.edit", compact('edit', 'permissions'));
+        return nue_view("$this->view.create", [
+            'title' => $this->title, 
+            'edit' => $edit, 
+            'permissions' => $permissions
+        ]);
     }
 
     /**
@@ -142,7 +152,7 @@ class UserController extends Controller
         $edit->roles()->sync($request->roles);
         $edit->permissions()->sync($request->permissions);
 
-        notify()->flash($this->tUpdate, 'success');
+        nue_notify($this->tUpdate, 'success');
         return redirect(route("$this->prefix.index"));
     }
 
@@ -158,11 +168,15 @@ class UserController extends Controller
         if($request->has('pilihan')):
             foreach($request->pilihan as $temp):
                 $data = $this->data->findOrFail($temp);
-                $data->delete();
+                switch($id):
+                    case 'bulk-delete':
+                        $data->forceDelete();
+                    break;
+                    default:
+                    break;
+                endswitch;
             endforeach;
-            
-            notify()->flash($this->tDelete, 'success');
-            return redirect()->back();
+            return 'success';
         endif;
     }
 
@@ -181,7 +195,9 @@ class UserController extends Controller
                     </div>';
             })
             ->editColumn('uid', function($data) {
-                return '<code>'.$data['uid'].'</code>';
+                if(!is_null($data['uid'])):
+                    return '<i class="bi bi-check-lg text-success"></i>';
+                endif;
             })
             ->editColumn('roles', function($data) {
                 $return = '';
@@ -198,7 +214,7 @@ class UserController extends Controller
                 endif;
             })
             ->editColumn('action', function($data) {
-                return '<a href="'.route("$this->prefix.edit", $data->id).'" class="btn btn-xs btn-info rounded-xs">
+                return '<a href="'.route("$this->prefix.edit", $data->id).'" class="btn btn-xs btn-info rounded-xs" data-pjax>
                         <i class="bi bi-pencil-square"></i>
                         '.__('Edit').'
                     </a>';
